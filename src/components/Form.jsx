@@ -59,7 +59,7 @@ const Form = () => {
                     <button type="submit">Add Note</button>
                 </form>
             </div>
-            <Notes notes={notes} />
+            <Notes notes={notes} setNotes={setNotes} />
         </>
     )
 }

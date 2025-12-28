@@ -1,6 +1,14 @@
 import React from 'react'
+import { useEffect } from 'react';
 
-const Notes = ({ notes }) => {
+const Notes = ({ notes, setNotes }) => {
+
+  const handleDelete = (e) => {
+    let note = e.target.closest('.note');
+    const updatedNotes = notes.filter((_, idx) => idx !== parseInt(note.dataset.index));
+    setNotes(updatedNotes);
+  }
+
   return (
 
     <div className="notes">
@@ -9,15 +17,11 @@ const Notes = ({ notes }) => {
         {notes.length !== 0 ? (
           notes.map((note, idx) => {
             return (
-              <div key={idx} className="note" id={idx}>
+              <div key={idx} className="note" data-index={idx}>
                 <h3>{note.title}</h3>
                 <p>{note.note}</p>
                 <div className="delete">
-                  <button
-                    onClick={(e) => {
-                      console.log(e.target.closest('.note'));
-                    }}
-                  >
+                  <button onClick={e => handleDelete(e)}>
                     Delete
                   </button>
                 </div>
